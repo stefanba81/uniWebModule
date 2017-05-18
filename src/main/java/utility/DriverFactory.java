@@ -40,7 +40,7 @@ public class DriverFactory {
       @AfterMethod(alwaysRun=true)
       public static void closeDriverObjects() {
           for (WebDriverThread webDriverThread : webDriverThreadPool) {
-              //webDriverThread.quitDriver();
+              webDriverThread.quitDriver();
           }
           System.out.println("----------------------Browser Closed----------------------");
       }
