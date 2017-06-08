@@ -25,7 +25,9 @@ public class DriverFactory {
     }
 
     public static WebDriver getDriver() throws Exception {
-        return driverThread.get().getDriver();
+        WebDriver driver = driverThread.get().getDriver();
+        driver.manage().window().maximize();
+        return driver;
     }
    /*
          @AfterMethod (alwaysRun=true)
@@ -40,7 +42,7 @@ public class DriverFactory {
       @AfterMethod(alwaysRun=true)
       public static void closeDriverObjects() {
           for (WebDriverThread webDriverThread : webDriverThreadPool) {
-              webDriverThread.quitDriver();
+              //webDriverThread.quitDriver();
           }
           System.out.println("----------------------Browser Closed----------------------");
       }

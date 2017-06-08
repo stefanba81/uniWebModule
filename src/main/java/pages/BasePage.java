@@ -13,6 +13,7 @@ import java.util.Set;
  * Created by StefanB on 5/4/2017.
  */
 public abstract class BasePage extends PageMethods{
+
     protected WebDriver driver;
     private By signInButton = By.linkText("Sign in");
     private String originalWindowTitle;
@@ -24,13 +25,17 @@ public abstract class BasePage extends PageMethods{
     public abstract String getPageURL();
 
     public void openPage() {
-        String url = String.format("%s%s", PropertyManager.getProperty("URL"), getPageURL());
+        String url = String.format("%s%s%s",getProtocol(), PropertyManager.getProperty("URL"), getPageURL());
         for(int i = 0; i < 2; i++) {
             driver.get(url);
             if(!driver.getPageSource().contains("Uh oh! The Kitchen's a mess!")){
                 return;
             }
         }
+    }
+
+    public String getProtocol() {
+        return (PropertyManager.getProperty("SECURE") != null &&PropertyManager.getProperty("SECURE").equalsIgnoreCase("true")) ? "https://" : "http://";
     }
 
     public void clickSignInBtn() {
@@ -41,19 +46,10 @@ public abstract class BasePage extends PageMethods{
         else System.out.println("Element not found");
     }
 
-    public void clickImagesLink() {
-        //It should have a logic to click on images link
-        //And it should navigate to google images page
-    }
 
     public String getPageTitle(){
         String title = driver.getTitle();
         return title;
-    }
-
-    public boolean verifyBasePageTitle() {
-        String expectedPageTitle="Google";
-        return getPageTitle().contains(expectedPageTitle);
     }
 
     /**

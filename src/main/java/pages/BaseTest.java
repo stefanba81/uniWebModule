@@ -1,3 +1,5 @@
+package pages;
+
 import com.google.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;

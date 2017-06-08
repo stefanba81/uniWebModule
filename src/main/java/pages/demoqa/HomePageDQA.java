@@ -1,16 +1,15 @@
 package pages.demoqa;
 
 import org.openqa.selenium.WebDriver;
+import pages.BasePage;
 
 /**
  * Created by StefanB on 5/12/2017.
  */
-public class HomePageDQA {
+public class HomePageDQA extends BasePage{
 
-    static WebDriver driver;
-
-    public HomePageDQA(WebDriver passedDriver) {
-        driver = passedDriver;
+    public HomePageDQA(WebDriver driver) {
+        super(driver);
     }
 
     public String getPageURL(){
