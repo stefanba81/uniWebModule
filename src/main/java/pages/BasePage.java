@@ -25,17 +25,27 @@ public abstract class BasePage extends PageMethods{
     public abstract String getPageURL();
 
     public void openPage() {
-        String url = String.format("%s%s%s",getProtocol(), PropertyManager.getProperty("URL"), getPageURL());
-        for(int i = 0; i < 2; i++) {
-            driver.get(url);
-            if(!driver.getPageSource().contains("Uh oh! The Kitchen's a mess!")){
-                return;
-            }
-        }
+        String url = String.format("%s%s%s",getProtocol(), getWebSite(), getPageURL());
+        driver.get(url);
     }
 
     public String getProtocol() {
         return (PropertyManager.getProperty("SECURE") != null &&PropertyManager.getProperty("SECURE").equalsIgnoreCase("true")) ? "https://" : "http://";
+    }
+
+    public String getWebSite() {
+        String webSite;
+        switch (PropertyManager.getProperty("WEBSITE")){
+            case "A":
+                webSite = PropertyManager.getProperty("URL1");
+                break;
+            case "B":
+                webSite = PropertyManager.getProperty("URL2");
+                break;
+            default:
+                webSite = PropertyManager.getProperty("URL1");
+        }
+        return webSite;
     }
 
     public void clickSignInBtn() {
