@@ -3,7 +3,6 @@ package pages.demoqa;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasePage;
 
@@ -42,7 +41,7 @@ public class HomePageDQA extends BasePage{
     }
 
     public String getBreadcrumbText() {
-        return _wait.until(ExpectedConditions.visibilityOf(BREADCRUMB_TEXT)).getText();
+        return BREADCRUMB_TEXT.getText();
     }
 
 }

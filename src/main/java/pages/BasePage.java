@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public abstract class BasePage extends PageMethods{
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public abstract String getPageURL();
@@ -27,6 +29,11 @@ public abstract class BasePage extends PageMethods{
     public void openPage() {
         String url = String.format("%s%s%s",getProtocol(), getWebSite(), getPageURL());
         driver.get(url);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getProtocol() {
