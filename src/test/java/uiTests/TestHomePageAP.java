@@ -12,13 +12,45 @@ import utility.DriverFactory;
  */
 public class TestHomePageAP extends DriverFactory {
 
+    /**
+     * Opens HomePage and verifies the Breadcrumb
+     *
+     * @throws Exception
+     */
     @Test
-    public void testHomepageSections() throws Exception {
+    public void testHomepageBreadcrumb() throws Exception {
         WebDriver driver = getDriver();
         HomePageDQA home = new HomePageDQA(driver);
         home.openPage();
         Assert.assertTrue(home.getBreadcrumbText().equals("Home"), "Incorrect Breadcrumb!");
-        //Assert.assertTrue(home.getNavBarHREF().equals("http://demoqa.com/"), "Incorrect Logo HREF!");
+    }
+
+    /**
+     * Opens HomePage and verifies the Navigation Bar Logo - HREF
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testHomepageLogoHref() throws Exception {
+        WebDriver driver = getDriver();
+        HomePageDQA home = new HomePageDQA(driver);
+        home.openPage();
+        Assert.assertTrue(home.getNavBarHREF().equals("http://demoqa.com/"), "Incorrect Logo HREF!");
+    }
+
+    /**
+     * Opens HomePAge and verifies the title of each content column
+     * @throws Exception
+     */
+    @Test
+    public void testContentTitles() throws Exception {
+        WebDriver driver = getDriver();
+        HomePageDQA home = new HomePageDQA(driver);
+        home.openPage();
+        System.out.println(home.getContentTitles());
+        Assert.assertTrue(home.getContentTitles().contains("Unique & Clean") &&
+                home.getContentTitles().contains("Customer Support") && home.getContentTitles()
+                .contains("Very Flexible"));
     }
 
     @Test

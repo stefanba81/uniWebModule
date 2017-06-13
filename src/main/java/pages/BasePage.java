@@ -19,9 +19,17 @@ public abstract class BasePage extends PageMethods{
     private By signInButton = By.linkText("Sign in");
     private String originalWindowTitle;
 
+    /**
+     * This runs post injection
+     */
+    @Override
+    public void init(){
+        PageFactory.initElements(driver, this);
+    }
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        init();
     }
 
     public abstract String getPageURL();

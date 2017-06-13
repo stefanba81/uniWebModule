@@ -1,7 +1,7 @@
 package utility;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeSuite;
 import utility.driver.WebDriverThread;
 
@@ -33,16 +33,16 @@ public class DriverFactory {
          @AfterMethod (alwaysRun=true)
 
       public static void clearCookies() throws Exception {
-          getDriver().manage().deleteAllCookies();k
+          getDriver().manage().deleteAllCookies();
           System.out.println("----------------------------------------------------");
       }
     }
 
 */
-      @AfterMethod(alwaysRun=true)
+      @AfterClass(alwaysRun=true)
       public static void closeDriverObjects() {
           for (WebDriverThread webDriverThread : webDriverThreadPool) {
-              //webDriverThread.quitDriver();
+              webDriverThread.quitDriver();
           }
           System.out.println("----------------------Browser Closed----------------------");
       }
